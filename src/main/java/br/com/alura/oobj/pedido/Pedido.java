@@ -1,23 +1,34 @@
-package br.com.alura.oobj;
+package br.com.alura.oobj.pedido;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Pedido {
 
-  private List<ItemPedido> itens;
+    public Pedido(List<ItemPedido> itens){
+        this.itens = itens;
+    }
 
-  public List<ItemPedido> getItens() {
-    return itens;
+    private List<ItemPedido> itens;
+
+    public List<ItemPedido> getItens() {
+        return itens;
   }
 
-  public void setItens(List<ItemPedido> itens) {
-    this.itens = itens;
+    public BigDecimal retornaValorTotal() {
+        BigDecimal totalPedido = BigDecimal.ZERO;
+        for (ItemPedido itemPedido : itens) {
+            BigDecimal subtotal = itemPedido.retornaSubTotal();
+            totalPedido = totalPedido.add(subtotal);
+        }
+        return totalPedido;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "itens=" + itens +
+                '}';
+    }
   }
 
-  @Override
-  public String toString() {
-    return "Pedido{" +
-        "itens=" + itens +
-        '}';
-  }
-}

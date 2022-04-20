@@ -1,4 +1,4 @@
-package br.com.alura.oobj;
+package br.com.alura.oobj.pedido;
 
 import com.opencsv.bean.CsvBindByName;
 
@@ -39,6 +39,11 @@ public class ItemPedido {
 
   public String getClasseFiscal() {
     return classeFiscal;
+  }
+
+  public BigDecimal retornaSubTotal(){
+    BigDecimal subTotal = valorUnitario.multiply(BigDecimal.valueOf(quantidade));
+    return subTotal;
   }
 
   @Override

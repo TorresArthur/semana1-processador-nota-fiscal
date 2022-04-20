@@ -1,28 +1,23 @@
 package br.com.alura.oobj.leitura;
 
-import br.com.alura.oobj.IdentificaTipoArquivo;
-import br.com.alura.oobj.ItemPedido;
+import br.com.alura.oobj.identificaTipos.IdentificaTipoArquivo;
+import br.com.alura.oobj.pedido.ItemPedido;
 
+import java.io.File;
+import java.io.FileFilter;
 import java.util.List;
-import java.util.Objects;
 
 public class LeitorDeArquivos {
 
     public List<ItemPedido> lerArquivos(String arquivo) {
         List<ItemPedido> itemPedido;
         IdentificaTipoArquivo parametroArquivo = new IdentificaTipoArquivo();
-        String tipoDoArquivo = parametroArquivo.identificaTipoArquivo(arquivo);
 
-        if (Objects.equals(tipoDoArquivo, ".csv")){
-            Leitor arquivoASerLido = new LeitorCsv();
-            itemPedido = arquivoASerLido.ler(arquivo);
-        }else if (Objects.equals(tipoDoArquivo, ".xml")) {
-            Leitor arquivoASerLido = new LeitorXml();
-            itemPedido = arquivoASerLido.ler(arquivo);
-        }else{
-            throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
-        }
+        Leitor tipoDoArquivo = parametroArquivo.identificaTipoArquivo(arquivo);
+
+        itemPedido = tipoDoArquivo.ler(arquivo);
 
         return itemPedido;
     }
+
 }

@@ -1,7 +1,7 @@
 package br.com.alura.oobj.leitura;
 
-import br.com.alura.oobj.ItemPedido;
-import br.com.alura.oobj.Pedido;
+import br.com.alura.oobj.pedido.ItemPedido;
+import br.com.alura.oobj.pedido.Pedido;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.FileReader;

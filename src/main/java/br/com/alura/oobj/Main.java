@@ -1,6 +1,9 @@
 package br.com.alura.oobj;
 
+import br.com.alura.oobj.calculoPrecos.SubTotalPorClasseFiscal;
 import br.com.alura.oobj.leitura.LeitorDeArquivos;
+import br.com.alura.oobj.pedido.ItemPedido;
+import br.com.alura.oobj.pedido.Pedido;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,16 +20,14 @@ public class Main {
 
     String arquivo = args[0];
 
-    LeitorDeArquivos arquivoLido = new LeitorDeArquivos();
-    CalculaPrecoTotal preco = new CalculaPrecoTotal();
+    LeitorDeArquivos arquivoASerLido = new LeitorDeArquivos();
+    List<ItemPedido> itensDoPedido = arquivoASerLido.lerArquivos(arquivo);
+
+    Pedido pedido = new Pedido(itensDoPedido);
+    BigDecimal totalPedido = pedido.retornaValorTotal();
+
     SubTotalPorClasseFiscal subTotalClasseFiscal = new SubTotalPorClasseFiscal();
-
-
-    List<ItemPedido> itenPedido = arquivoLido.lerArquivos(arquivo);
-
-    BigDecimal totalPedido = preco.calcularPrecoTotal(itenPedido);
-
-    TreeMap<String, BigDecimal> subTotalPorClasseFiscal = subTotalClasseFiscal.calculaSubTotal(itenPedido);
+    TreeMap<String, BigDecimal> subTotalPorClasseFiscal = subTotalClasseFiscal.calculaSubTotal(itensDoPedido);
 
 
     System.out.println("## Total do pedido: " + totalPedido);
@@ -36,7 +37,6 @@ public class Main {
       BigDecimal subtotal = subTotalPorClasseFiscal.get(classeFiscal);
       System.out.println("\tSubtotal: " + subtotal);
     }
-
 
   }
 

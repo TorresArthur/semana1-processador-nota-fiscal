@@ -1,4 +1,6 @@
-package br.com.alura.oobj;
+package br.com.alura.oobj.calculoPrecos;
+
+import br.com.alura.oobj.pedido.ItemPedido;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,14 +15,10 @@ public class SubTotalPorClasseFiscal {
         for (ItemPedido itemPedido : itenPedido) {
             BigDecimal novoSubTotal = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
             String classeFiscal = itemPedido.getClasseFiscal();
-            BigDecimal subTotal = subTotalClasseFiscal.get(classeFiscal);
-            if (subTotal != null) {
-                subTotalClasseFiscal.put(classeFiscal, subTotal.add(novoSubTotal));
-            } else {
-                subTotalClasseFiscal.put(classeFiscal, novoSubTotal);
-            }
+            subTotalClasseFiscal.merge(classeFiscal, novoSubTotal, BigDecimal::add);
         }
         return subTotalClasseFiscal;
     }
 }
+
 

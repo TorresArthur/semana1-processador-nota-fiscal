@@ -1,6 +1,6 @@
 package br.com.alura.oobj.leitura;
 
-import br.com.alura.oobj.ItemPedido;
+import br.com.alura.oobj.pedido.ItemPedido;
 
 import java.util.List;
 
